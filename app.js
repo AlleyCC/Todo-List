@@ -1,7 +1,11 @@
 const express = require('express')
 const app = express()
 const port = 3000
+const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')  //載入Mongoose
+
+app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' })) //extname代表設定副檔名
+app.set('view engine', 'hbs')
 
 //取得資料庫連線狀態
 const db = mongoose.connection
@@ -22,7 +26,7 @@ db.once('open', () => {
 })
 
 app.get('/', (req, res) => {
-  res.send('start testing my project!')
+  res.render('index')
 })
 
 app.listen(port, (req, res) => {
