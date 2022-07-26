@@ -3,7 +3,7 @@ const app = express()
 const port = 3000
 const mongoose = require('mongoose')  //載入Mongoose
 
-
+//取得資料庫連線狀態
 const db = mongoose.connection
 //設定連線至MongoDB
 mongoose.connect(process.env.MONGODB_URI) 
