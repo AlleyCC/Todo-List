@@ -66,6 +66,14 @@ app.post('/todos/:id/edit', (req, res) => {  //post: edit頁面進行修改資�
     .catch(error => console.log(error))
 })
 
+app.post('/todos/:id/delete', (req, res) => {  //post: delete資料
+  const id = req.params.id
+  return Todo.findById(id)
+    .then(todo => todo.remove())
+    .then(() => res.redirect('/'))     //delete後redirect回首頁
+    .catch(error => console.log(error))
+})
+
 app.listen(port, (req, res) => {
   console.log(`It is running on http://localhost:${port}.`)
 })
