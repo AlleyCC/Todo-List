@@ -3,6 +3,7 @@ const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')  //載入Mongoose
+const Todo = require('./models/todo')
 
 app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' })) //extname代表設定副檔名
 app.set('view engine', 'hbs')
@@ -26,7 +27,10 @@ db.once('open', () => {
 })
 
 app.get('/', (req, res) => {
-  res.render('index')
+  Todo.find()   //撈出整份資料
+      .lean()  //把Models資料轉換成JS物件
+      .then(todos => res.render('index', { todos }) )  //{ todos } = { todos: todos }
+      .catch(error => console.error(error))
 })
 
 app.listen(port, (req, res) => {

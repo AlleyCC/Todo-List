@@ -1,1 +1,5 @@
-<h1>This is template engine driven by express-handlebars.</h1>
+<ul>
+  {{#each todos}}
+  <li>{{this.name}}</li>
+  {{/each}}
+</ul>
