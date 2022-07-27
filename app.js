@@ -39,6 +39,15 @@ app.post('/todos', (req, res) => {
     .then(() => res.redirect('/'))  //新增完成後重新導向回首頁
     .catch(error => console.log(error))
 })
+
+app.get('/todos/:id', (req, res) => {
+  const id = req.params.id
+  return Todo.findById(id)
+    .lean()
+    .then((todo) => res.render('detail', { todo } ))
+    .catch(error => console.log(error))
+})
+
 app.listen(port, (req, res) => {
   console.log(`It is running on http://localhost:${port}.`)
 })
