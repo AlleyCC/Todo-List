@@ -24,7 +24,8 @@ db.once('open', () => {   // 連線成功，once是一次性的監聽行為，�
 
 app.get('/', (req, res) => {
   Todo.find()   //撈出整份資料
-      .lean()  //把Models資料轉換成JS物件
+    .lean()   //把Models資料轉換成JS物件
+      .sort({_id: 'asc'})  //資料排序=>'asc'升冪/'desc'降冪
       .then(todos => res.render('index', { todos }) )  //{ todos } = { todos: todos }
       .catch(error => console.error(error))
 })
