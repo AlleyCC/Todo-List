@@ -1,14 +1,6 @@
 // 這是種子資料產生器
-const mongoose = require('mongoose') 
 const Todo = require('../todo')  //載入todo model
-
-mongoose.connect(process.env.MONGODB_URI)
-
-const db = mongoose.connection
-
-db.on('error', () => {
-  console.log('MongoDB error')
-})
+const db = require('../../config/mongoose')
 
 db.once('open', () => {
   console.log('MongoDB connected!')

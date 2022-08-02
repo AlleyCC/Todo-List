@@ -34,7 +34,7 @@ router.put('/:id', (req, res) => {  //post: edit頁面進行修改資料
   return Todo.findById(id)
     .then((todo) => {
       todo.name = name
-      todo.isDone = todo.isDone === 'on'
+      todo.isDone = isDone === 'on'
       return todo.save()
     })
     .then(() => res.redirect(`/todos/${id}`))
