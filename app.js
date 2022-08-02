@@ -29,11 +29,11 @@ app.get('/', (req, res) => {
       .catch(error => console.error(error))
 })
 
-app.get('/todos/new', (req, res) => {
+app.get('/todos/new', (req, res) => {  //到Create頁面
   return res.render('new')
 })
 
-app.post('/todos', (req, res) => {
+app.post('/todos', (req, res) => {   //Create
   const name = req.body.name  //拿到表單內欲增加的資料
   return Todo.create({name})  //存入資料庫
     .then(() => res.redirect('/'))  //新增完成後重新導向回首頁
@@ -56,11 +56,12 @@ app.get('/todos/:id/edit', (req, res) => {   //get: edit頁面
     .catch(error => console.log(error))
 })
 app.post('/todos/:id/edit', (req, res) => {  //post: edit頁面進行修改資料
-  const id = req.params.id
-  const name = req.body.name
+  const { id } = req.params
+  const { name, isDone } = req.body
   return Todo.findById(id)
     .then((todo) => {
       todo.name = name
+      todo.isDone = todo.isDone === 'on'
       return todo.save()})
     .then(() => res.redirect(`/todos/${id}`))
     .catch(error => console.log(error))

@@ -7,8 +7,9 @@ const todoSchema = new Schema({
     type: String,
     required: true
   },
-  done: {
-    type: Boolean
+  isDone: {
+    type: Boolean,
+    default: false    //(預設完成狀態=>false尚未完成)
   }
 })
 module.exports = mongoose.model('Todo', todoSchema)
