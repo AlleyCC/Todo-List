@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const PORT = process.env.PORT || 3000
 const exphbs = require('express-handlebars')
 require('./config/mongoose') //不需回傳參數，因此不需設變數
 
@@ -20,6 +20,6 @@ app.use(routes) //將request導入路由器
 
 
 
-app.listen(port, (req, res) => {
+app.listen(PORT, (req, res) => {
   console.log(`It is running on http://localhost:${port}.`)
 })
