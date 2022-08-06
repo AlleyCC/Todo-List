@@ -21,5 +21,5 @@ app.use(routes) //將request導入路由器
 
 
 app.listen(PORT, (req, res) => {
-  console.log(`It is running on http://localhost:${port}.`)
+  console.log(`It is running on http://localhost:${PORT}.`)
 })
