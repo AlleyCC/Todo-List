@@ -7,15 +7,18 @@ require('./config/mongoose') //不需回傳參數，因此不需設變數
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const routes = require('./routes')  //引用路由器
-
+const session = require('express-session')
 
 app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' })) //extname代表設定副檔名
 app.set('view engine', 'hbs')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(routes) //將request導入路由器
-
-
+app.use(session({
+  secret: 'ThisIsMySecret',
+  resave: false,
+  saveUninitialized: true
+}))
 
 
 
