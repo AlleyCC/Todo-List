@@ -20,10 +20,17 @@ app.use(session({
   saveUninitialized: true
 }))
 usePassport(app) //呼叫Passport並傳入app，必須寫在路由之前
+
+
+// 把req裡的登入狀態交接給res，此設定必須放在usePassport(app)之後routes之前
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated() //把isAuthenticated()回傳的Boolean交給res
+  res.locals.user = req.user  //把user的資料交給res(給樣板使用)
+  next()
+})
+
+
 app.use(routes) //將request導入路由器
-
-
-
 
 app.listen(PORT, (req, res) => {
   console.log(`It is running on http://localhost:${PORT}.`)
