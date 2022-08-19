@@ -14,13 +14,13 @@ app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' })) //e
 app.set('view engine', 'hbs')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
-usePassport(app) //呼叫Passport並傳入app，必須寫在路由之前
-app.use(routes) //將request導入路由器
 app.use(session({
   secret: 'ThisIsMySecret',
   resave: false,
   saveUninitialized: true
 }))
+usePassport(app) //呼叫Passport並傳入app，必須寫在路由之前
+app.use(routes) //將request導入路由器
 
 
 
