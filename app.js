@@ -30,6 +30,7 @@ app.use((req, res, next) => {
   res.locals.user = req.user  //把user的資料交給res(給樣板使用)
   res.locals.success_msg = req.flash('success_msg')
   res.locals.warning_msg = req.flash('warning_msg')
+  
   next()
 })
 
