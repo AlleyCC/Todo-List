@@ -3,10 +3,16 @@ const app = express()
 const PORT = process.env.PORT || 3000
 const exphbs = require('express-handlebars')
 require('./config/mongoose') //不需回傳參數，因此不需設變數
+require('dotenv').config()
 
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const flash = require('connect-flash')
+
+if (process.env.NODE_ENV !== 'production') {  //判斷repo是不是在正式上線的環境中執行
+  require('dotenv').config() //若不是則讀取.env裡面的資訊
+}
+
 const routes = require('./routes')  //引用路由器
 const session = require('express-session')
 const usePassport = require('./config/passport') //載入設定檔，必須寫在express-session之後
@@ -17,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
 app.use(session({
-  secret: 'ThisIsMySecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
